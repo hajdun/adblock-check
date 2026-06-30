@@ -7,7 +7,7 @@ function App() {
     <>
       <section id="center">
         <div>
-          Adblock detection result:
+          Adblock detection result in alert
         </div>
       </section>
     </>

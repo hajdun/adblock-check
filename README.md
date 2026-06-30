@@ -1,5 +1,5 @@
 # Adblock detect
-Attempt to detect adblock services
+Attempt to detect adblock services using https://github.com/sitexw/FuckAdBlock
 
 # React + TypeScript + Vite
 Made with
