@@ -8,63 +8,9 @@
 </head>
 
 <body>
-
   <div id="root"></div>
-  <div id="list"></div>
-  Use a first-party bait element or a local bait script, not a third-party CDN. The simplest reliable pattern is to
-  place a hidden element with ad-like classes, wait briefly, then inspect whether the blocker removed or hid it.
-
-  Element bait
-  This approach stays entirely on your own site:
-
-  xml
-  <div id="ad-bait" class="adsbox ad-placement ad-banner"
-    style="position:absolute;left:-9999px;top:-9999px;width:300px;height:250px;">
-    <span>Sponsored content</span>
-  </div>
-  <div id="bait" class="ad adsbox ad-placement"
-    style="position:absolute;left:-9999px;top:-9999px;width:300px;height:250px;">
-    <span>Sponsored</span>
-  </div>
-
-  <img id="probe" src="/ads/probe-image.png" alt="" style="display:none">
-
-  <script>
-    function report(blocked) {
-      console.log(blocked ? 'Ad blocker detected' : 'No ad blocker detected');
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-      setTimeout(() => {
-        const bait = document.getElementById('bait');
-        const hidden =
-          !bait ||
-          bait.offsetHeight === 0 ||
-          bait.offsetWidth === 0 ||
-          getComputedStyle(bait).display === 'none' ||
-          getComputedStyle(bait).visibility === 'hidden';
-
-        const probe = document.getElementById('probe');
-        const blockedByRequest = probe && probe.complete && probe.naturalWidth === 0;
-
-        report(hidden || blockedByRequest);
-      }, 300);
-    });
-  </script>
-
   <script type="module" src="/src/main.tsx"></script>
-
   <script src="ads.js"></script>
-
-
-  <script>
-    if (window.adsAreWithUs === true) {
-
-      console.log("not blockeeed")
-    } else {
-      console.log("blockeeed")
-    }
-  </script>
 </body>
 
 </html>

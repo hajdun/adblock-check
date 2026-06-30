@@ -1,8 +1,3 @@
-(function () {
-    'use strict';
-    window.adsAreWithUs = true;
-})();
-
 
 async function detectAdBlock() {
     let adBlockEnabled = false
@@ -13,7 +8,7 @@ async function detectAdBlock() {
         adBlockEnabled = true
     } finally {
         // actual result
-        console.log(`AdBlock Enabled: ${adBlockEnabled}`)
+        alert(`AdBlock Enabled: ${adBlockEnabled}`)
     }
 }
 detectAdBlock()

@@ -1,8 +1,14 @@
 # Adblock detect
-Attempt to detect adblock services using 
+Attempt to detect adblock services 
+
+## Working
+https://stackoverflow.com/questions/4869154/how-to-detect-adblock-on-my-website
+
+## Did not work
 - https://github.com/sitexw/FuckAdBlock
 - https://www.golinuxcloud.com/detect-ad-block-javascript/ 
 - https://www.npmjs.com/package/adblock-detect-react
+- Claude's ideas
 
 # React + TypeScript + Vite
 Made with
