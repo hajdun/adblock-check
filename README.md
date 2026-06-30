@@ -1,5 +1,8 @@
 # Adblock detect
-Attempt to detect adblock services using https://github.com/sitexw/FuckAdBlock
+Attempt to detect adblock services using 
+- https://github.com/sitexw/FuckAdBlock
+- https://www.golinuxcloud.com/detect-ad-block-javascript/ 
+- https://www.npmjs.com/package/adblock-detect-react
 
 # React + TypeScript + Vite
 Made with
