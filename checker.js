@@ -20,3 +20,10 @@ function run() {
 }
 
 requestAnimationFrame(run);
+
+setTimeout(() => {
+    const el = document.querySelector("#bait .ads");
+    if (!el || el.offsetHeight === 0 || getComputedStyle(el).display === 'none') {
+        console.log('Ad blocker detected');
+    }
+}, 200);

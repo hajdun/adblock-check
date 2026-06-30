@@ -1,8 +1,7 @@
 import './App.css'
 import { AdBlockDetectedWrapper } from "adblock-detect-react";
+
 function App() {
-
-
 
   return (
     <>

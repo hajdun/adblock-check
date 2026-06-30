@@ -5,7 +5,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ad-block probe</title>
-  <link rel="stylesheet" href="style.css" />
   <script>
     // Function called if AdBlock is not detected
     function adBlockNotDetected() {
@@ -49,9 +48,13 @@
   <div id="bait" aria-hidden="true">
     <div class="ads"></div>
   </div>
+
+  <div class="ad-placement adsbox" style="height:1px;"></div>
+
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
   <script src="checker.js" defer></script>
+  <script src="ads.js" defer></script>
 </body>
 
 </html>
