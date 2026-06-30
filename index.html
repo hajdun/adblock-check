@@ -5,56 +5,66 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ad-block probe</title>
-  <script>
-    // Function called if AdBlock is not detected
-    function adBlockNotDetected() {
-      alert('AdBlock is not enabled');
-    }
-    // Function called if AdBlock is detected
-    function adBlockDetected() {
-      alert('AdBlock is enabled');
-    }
-
-
-    // We look at whether FuckAdBlock already exists.
-    if (typeof fuckAdBlock !== 'undefined' || typeof FuckAdBlock !== 'undefined') {
-      // If this is the case, it means that something tries to usurp are identity
-      // So, considering that it is a detection
-      adBlockDetected();
-    } else {
-      // Otherwise, you import the script FuckAdBlock
-      var importFAB = document.createElement('script');
-      importFAB.onload = function () {
-        // If all goes well, we configure FuckAdBlock
-        fuckAdBlock.onDetected(adBlockDetected)
-        fuckAdBlock.onNotDetected(adBlockNotDetected);
-      };
-      importFAB.onerror = function () {
-        // If the script does not load (blocked, integrity error, ...)
-        // Then a detection is triggered
-        adBlockDetected();
-      };
-      importFAB.integrity = 'sha256-xjwKUY/NgkPjZZBOtOxRYtK20GaqTwUCf7WYCJ1z69w=';
-      importFAB.crossOrigin = 'anonymous';
-      importFAB.src = 'https://cdnjs.cloudflare.com/ajax/libs/fuckadblock/3.2.1/fuckadblock.min.js';
-      document.head.appendChild(importFAB);
-    }
-
-  </script>
-  <title>adblock-check</title>
 </head>
 
 <body>
-  <div id="bait" aria-hidden="true">
-    <div class="ads"></div>
-  </div>
-
-  <div class="ad-placement adsbox" style="height:1px;"></div>
 
   <div id="root"></div>
+  <div id="list"></div>
+  Use a first-party bait element or a local bait script, not a third-party CDN. The simplest reliable pattern is to
+  place a hidden element with ad-like classes, wait briefly, then inspect whether the blocker removed or hid it.
+
+  Element bait
+  This approach stays entirely on your own site:
+
+  xml
+  <div id="ad-bait" class="adsbox ad-placement ad-banner"
+    style="position:absolute;left:-9999px;top:-9999px;width:300px;height:250px;">
+    <span>Sponsored content</span>
+  </div>
+  <div id="bait" class="ad adsbox ad-placement"
+    style="position:absolute;left:-9999px;top:-9999px;width:300px;height:250px;">
+    <span>Sponsored</span>
+  </div>
+
+  <img id="probe" src="/ads/probe-image.png" alt="" style="display:none">
+
+  <script>
+    function report(blocked) {
+      console.log(blocked ? 'Ad blocker detected' : 'No ad blocker detected');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        const bait = document.getElementById('bait');
+        const hidden =
+          !bait ||
+          bait.offsetHeight === 0 ||
+          bait.offsetWidth === 0 ||
+          getComputedStyle(bait).display === 'none' ||
+          getComputedStyle(bait).visibility === 'hidden';
+
+        const probe = document.getElementById('probe');
+        const blockedByRequest = probe && probe.complete && probe.naturalWidth === 0;
+
+        report(hidden || blockedByRequest);
+      }, 300);
+    });
+  </script>
+
   <script type="module" src="/src/main.tsx"></script>
-  <script src="checker.js" defer></script>
-  <script src="ads.js" defer></script>
+
+  <script src="ads.js"></script>
+
+
+  <script>
+    if (window.adsAreWithUs === true) {
+
+      console.log("not blockeeed")
+    } else {
+      console.log("blockeeed")
+    }
+  </script>
 </body>
 
 </html>

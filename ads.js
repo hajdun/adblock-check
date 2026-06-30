@@ -1,11 +1,19 @@
-// ads.js (bait file - named to be blocked)
-window.adBlockNotDetected = true;
+(function () {
+    'use strict';
+    window.adsAreWithUs = true;
+})();
 
-// main.js
-setTimeout(() => {
-    if (!window.adBlockNotDetected) {
-        console.log('Blocked!')
-    } else {
-        console.log("no blocker")
+
+async function detectAdBlock() {
+    let adBlockEnabled = false
+    const googleAdUrl = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
+    try {
+        await fetch(new Request(googleAdUrl)).catch(_ => adBlockEnabled = true)
+    } catch (e) {
+        adBlockEnabled = true
+    } finally {
+        // actual result
+        console.log(`AdBlock Enabled: ${adBlockEnabled}`)
     }
-}, 100);
+}
+detectAdBlock()
